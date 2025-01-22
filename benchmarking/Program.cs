@@ -29,20 +29,20 @@ static class Program
 		report.AddBenchmark("Microsoft.Extensions.ObjectPool.DefaultObjectPool",
 			count => () => new DefaultObjectPool<object>(() => new object(), (int)count * 2));
 
-		report.AddBenchmark("ConcurrentQueueObjectPoolSlim",
+		report.AddBenchmark(nameof(ConcurrentQueueObjectPoolSlim),
 			count => () => ConcurrentQueueObjectPoolSlim.Create<object>((int)count * 2));
 
-		report.AddBenchmark("ConcurrentQueueObjectPool",
+		report.AddBenchmark(nameof(ConcurrentQueueObjectPool),
 			count => () => ConcurrentQueueObjectPool.Create<object>((int)count * 2));
 
-		//report.AddBenchmark("ConcurrentStackObjectPool",
+		//report.AddBenchmark(nameof(ConcurrentQueueObjectPool),
 		//	count => () => ConcurrentStackObjectPool.Create<object>((int)count * 2));
 
-		report.AddBenchmark("OptimisticArrayObjectPool",
+		report.AddBenchmark(nameof(OptimisticArrayObjectPool),
 			count => () => OptimisticArrayObjectPool.Create<object>((int)count * 2));
 
 		// Is ineveitably slower than the above but should be enabled for testing code changes.
-		report.AddBenchmark("InterlockedArrayObjectPool",
+		report.AddBenchmark(nameof(InterlockedArrayObjectPool),
 			count => () => InterlockedArrayObjectPool.Create<object>((int)count * 2));
 
 		report.Pretest(200, 200); // Run once through first to scramble/warm-up initial conditions.

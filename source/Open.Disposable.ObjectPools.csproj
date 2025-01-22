@@ -48,10 +48,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ClrHeapAllocationAnalyzer" Version="3.*">
+		<!--<PackageReference Include="ClrHeapAllocationAnalyzer" Version="3.*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		</PackageReference>-->
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -63,4 +63,9 @@
 		<PackageReference Include="System.Threading.Channels" Version="8.*" Condition="'$(TargetFramework)' != 'net9.0'" />
 	</ItemGroup>
 
+	<!-- 👇 disable the nullable warnings when compiling for .NET Standard 2.0 -->
+	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<NoWarn>$(NoWarn);nullable</NoWarn>
+	</PropertyGroup>
+	
 </Project>
